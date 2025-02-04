@@ -1,0 +1,13 @@
+api = bd680408b6b73cc68c410550a403ae836139a6f5
+username of comicvine = Natebell
+
+
+https://comicvine.gamespot.com/api/characters/?api_key=bd680408b6b73cc68c410550a403ae836139a6f5&format=json&field_list=id,name,image&limit=30
+
+https://comicvine.gamespot.com/api/characters/?api_key=bd680408b6b73cc68c410550a403ae836139a6f5&format=json&field_list=id,gender:1,name,image&limit=30
+
+https://comicvine.gamespot.com/api/characters/?api_key=bd680408b6b73cc68c410550a403ae836139a6f5&format=json&filter=id:1260
+
+id = 1260-1690
+
+1480 - very cool hero

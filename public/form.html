@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick a Superhero</title>
+    <style>
+        /* Center the entire page */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://www.pixelstalk.net/wp-content/uploads/images6/Cool-Marvel-Backgrounds-for-Desktop.jpg");
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Prevent tiling */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full screen height */
+            margin: 0; /* Remove default margin */
+            color:white;
+        }
+
+        /* Form container */
+        .div_form {
+    background-color: rgba(0, 0, 0, 0.5); /* Dark background with transparency */
+    padding: 40px; /* Increased padding for a bigger box */
+    border-radius: 15px; /* Slightly bigger rounded corners */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center content inside */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3); /* Bigger shadow for effect */
+    width: 400px; /* Make the box wider */
+    gap: 15px;
+    }
+
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px; /* Space between input and button */
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #001b38;
+        }
+    </style>
+</head>
+<body>
+    <div class="div_form">
+        <h1>Pick a Superhero</h1>
+        <p>Enter a superhero ID to get details (1260-1600):</p>
+    
+        <form action="/search" method="POST">
+            <label for="heroId">Superhero ID:</label>
+            <input type="number" id="heroId" name="heroId" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</body>
+</html>
+
+
