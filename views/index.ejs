@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superhero Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://www.pixelstalk.net/wp-content/uploads/images6/Cool-Marvel-Backgrounds-for-Desktop.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        .hero-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 18px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
+            width: 350px;
+        }
+        img {
+            width: 80%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        h1, h2, h3 {
+            margin: 10px 0;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-container">
+        <h1>This is the hero you chose</h1>
+        
+        <% if (hero.image) { %>
+            <img src="<%= hero.image.original_url %>" alt="<%= hero.name %>">
+        <% } %>
+
+        <h2>Name: <%= hero.name %></h2>
+
+        <% if (hero.publisher) { %>
+            <h3>Publisher: <%= hero.publisher.name %></h3>
+        <% } else { %>
+            <h3>Publisher: Unknown</h3>
+        <% } %>
+
+        <a href="/">Go Back</a>
+    </div>
+</body>
+</html>

@@ -3,6 +3,7 @@ import axios from "axios";
 import bodyParser from "body-parser";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import { fetchHeroesInRange } from "./search.js"; // Import function to fetch heroes in range
 
 const app = express();
 const PORT = 3000;
@@ -22,12 +23,17 @@ app.use(express.static("public"));
 
 // 🏠 Home route (renders the form)
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/form.html"); // Now `__dirname` is properly defined
+    res.sendFile(__dirname + "/public/form.html"); // Ensure form.html exists
 });
 
 // 🔍 Handle form submission and fetch superhero data
 app.post("/search", async (req, res) => {
-    const heroId = req.body.heroId; // Get the ID from the form
+    const heroId = req.body.heroId.trim(); // Trim input
+
+    // ✅ Ensure heroId is a valid number
+    if (!heroId || isNaN(heroId)) {
+        return res.status(400).send("❌ Invalid ID! Please enter a valid number.");
+    }
 
     try {
         // Fetch superhero data from the API
@@ -40,20 +46,43 @@ app.post("/search", async (req, res) => {
             }
         });
 
-        // Extract superhero details
-        const hero = response.data.results[0]; // First result
+        // ✅ Ensure the API response is valid
+        const heroes = response.data.results || [];
 
-        if (!hero) {
-            return res.send("No superhero found!");
+        if (heroes.length === 0) {
+            return res.send("⚠ No superhero found with this ID!");
         }
+
+        const hero = heroes[0]; // First result
 
         // Render the `index.ejs` template with superhero data
         res.render("index", { hero });
     } catch (error) {
-        console.error("Error fetching data:", error.message);
-        res.status(500).send("Error fetching superhero data");
+        console.error("❌ Error fetching superhero data:", error.message);
+        res.status(500).send("⚠ Error fetching superhero data. Please try again.");
     }
 });
+
+// 🔍 Fetch all superheroes between ID 1200-1800
+
+/*app.get("/fetch-heroes", async (req, res) => {
+    try {
+        const heroes = await fetchHeroesInRange(1200, 1800);
+
+        // Extract only the IDs from the hero list
+        const heroIds = heroes.map(hero => hero.id);
+
+        res.json({ 
+            count: heroes.length, 
+            heroes, // Keep the full hero data
+            heroIds // Add an array of IDs at the bottom
+        });
+    } catch (error) {
+        console.error("❌ Error fetching heroes:", error.message);
+        res.status(500).json({ error: "⚠ Error fetching superhero list." });
+    }
+});*/
+
 
 // Start the server
 app.listen(PORT, () => {
